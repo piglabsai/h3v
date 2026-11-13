@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "h3v"
+version = "0.1.0"
+description = "Packed 128-bit H3 volume indices with independent surface and radial resolutions"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+classifiers = ["Development Status :: 3 - Alpha"]
+dependencies = ["h3==4.5.0"]
+
+[project.urls]
+Repository = "https://github.com/piglabsai/h3v"
+
+[project.optional-dependencies]
+docs = [
+    "sphinx>=7.4,<9",
+    "myst-parser>=3,<5",
+    "sphinx-book-theme>=1.1,<2",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+py-modules = [
+    "h3v",
+    "_h3v_core",
+    "h3v_indexing",
+    "h3v_inspection",
+    "h3v_traversal",
+    "h3v_hierarchy",
+    "h3v_regions",
+    "h3v_directed_edges",
+    "h3v_vertexes",
+    "h3v_geometry",
+    "h3v_miscellaneous",
+]

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 265" role="img" aria-labelledby="title desc">
+<title id="title">An H3 cell plus an altitude interval makes a voxel</title>
+<desc id="desc">Left: a surface cell. Right: its footprint repeated at a bottom and top altitude, joined to show a volume.</desc>
+<rect x="1" y="1" width="758" height="263" rx="12" fill="#f5f8fb" stroke="#d4dee8"/>
+<g font-family="sans-serif" fill="#24394b">
+<text x="48" y="38" font-size="20" font-weight="600">H3: a surface cell</text>
+<text x="350" y="38" font-size="20" font-weight="600">H3V: cell + altitude interval</text>
+<polygon points="65,125 120,95 175,125 175,180 120,210 65,180" fill="#dcecf6" stroke="#367aa5" stroke-width="3"/>
+<text x="120" y="158" text-anchor="middle" font-size="15">footprint</text>
+<path d="M245 152h49m-10-8 10 8-10 8" fill="none" stroke="#62788a" stroke-width="2"/>
+<polygon points="365,149 420,119 475,149 475,199 420,229 365,199" fill="#dcecf6" stroke="#367aa5" stroke-width="2"/>
+<path d="M365 149v-73m55 43v-73m55 103v-73m0 123v-73m-55 103v-73m-55 43v-73" stroke="#367aa5" stroke-width="2"/>
+<polygon points="365,76 420,46 475,76 475,126 420,156 365,126" fill="#a9d7d0" fill-opacity=".8" stroke="#237e72" stroke-width="3"/>
+<path d="M484 78h34m-34 120h34m-10-110v101m-5-91 5-10 5 10m-10 81 5 10 5-10" fill="none" stroke="#62788a" stroke-width="1.5"/>
+<text x="535" y="82" font-size="15">top altitude</text>
+<text x="535" y="145" font-size="15">thickness</text>
+<text x="535" y="203" font-size="15">bottom altitude</text>
+</g></svg>

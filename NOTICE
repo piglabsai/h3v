@@ -1,0 +1,10 @@
+H3V
+Copyright 2026 H3V contributors
+
+Licensed under the Apache License, Version 2.0. See LICENSE.
+
+H3V is an independent extension and is not an official H3 format.
+H3V depends on H3 through h3-py, projects maintained by Uber Technologies
+and their contributors and distributed separately under Apache License 2.0.
+The authalic Earth radius follows H3's EARTH_RADIUS_KM constant:
+6371.007180918475 kilometres.
