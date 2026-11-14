@@ -54,7 +54,7 @@ def export(destination):
             shutil.copyfile(path, target)
         manifest[str(relative)] = hashlib.sha256(target.read_bytes()).hexdigest()
     (destination / "PREVIEW_MANIFEST.json").write_text(json.dumps({
-        "version": "0.1.1", "status": "experimental preview",
+        "version": "0.1.2", "status": "experimental preview",
         "scope": "Allowlisted current source files; no .git history, GitHub discussions, local environments, or reports",
         "comments": "Ordinary Python comments removed; docstrings and license notices retained; Python ASTs verified unchanged",
         "limitations": "This is a source snapshot, not an erasure of existing public forks, clones, caches, or the original repository",

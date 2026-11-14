@@ -1,5 +1,5 @@
 {
-  "version": "0.1.1",
+  "version": "0.1.2",
   "status": "experimental preview",
   "scope": "Allowlisted current source files; no .git history, GitHub discussions, local environments, or reports",
   "comments": "Ordinary Python comments removed; docstrings and license notices retained; Python ASTs verified unchanged",
@@ -8,8 +8,8 @@
     "README.md": "8a77b945754486373e6525dedd7904517f717f01fec81f65e6cbcc5921b49d17",
     "LICENSE": "c7da23164886dd048ed883432cee2dca1b50aa4a9ff0b2e27086854ff68aca54",
     "NOTICE": "fa67801fd9242e54bafabdc9dd9943f54e771568b15b21ab013856ae22d1a1f3",
-    "CHANGELOG.md": "9d7ee68616ddce94495d3f0c83647cf6722b7a731a4067eaca9dfe1056334b0d",
-    "pyproject.toml": "255a34ae90719a3de725739e31746f1a2c7c312fbf64b620948f039bd2a43152",
+    "CHANGELOG.md": "c41a9f8cb602a1277086fab7d0132649743a3755ab82f4df85f42dbc757247d6",
+    "pyproject.toml": "174dc522de9355d8973b10c492ca5af9a26d6bc08833b830e8066373b828d826",
     "MANIFEST.in": "4f87063fb29676a8ae1a6b97cd2316995c737a5d74cc8eb0d114f875c9109e93",
     ".gitignore": "7a231c6bce74dd4eb1f4fb00320065a7dda400b70a65c8f110e619b202edd96c",
     "src\\h3v.py": "793a02fffdeb9474aafcb345ac9bc53654137ecc11acfbbc01c37be6e52924fd",
@@ -38,16 +38,16 @@
     "docs\\api_reference.md": "ffeae5837e4d3e78df07ec70a211ba8c5d5591bddc20909db952f5702bccfdd9",
     "docs\\concepts.md": "0c6d6931b20a5278d0322265939726d4bb747d91ba4bb751c97f973a3cf917a4",
     "docs\\conf.py": "4756c30378e5f265ac81309bc43591e3c91ae5b660593c4ffa134fdc6d140376",
-    "docs\\contributing.md": "075d292d57a917caac840955630588f9684dfd0e5adb4af1194747457326f1d4",
+    "docs\\contributing.md": "c54b19afb24ae392ba91dacc67986dd74515c8bcbe17158f70078b9c2aa8a004",
     "docs\\documentation_guidelines.md": "846273b4aaa1281b4386e626374d7fcfb8f7e3ad9494499efc78e65e34bd9a06",
     "docs\\format.md": "37128d7d129969dd04e9c3c6cc7655309dd561a5212bc3b2eb06b286c103243b",
-    "docs\\index.md": "9e1640be04f4ab819670855977efb6c219a35cefc49ad2db455f0c0efe97dabd",
+    "docs\\index.md": "cfb1738170cb7e5a08b3272ed685d86146abb7d5f238d7da3c5407926cd84321",
     "docs\\usage.md": "76faf304a95e667a5891360cf83726b857735e2af0692766dcf3d7e205cd64eb",
     "docs\\_static\\voxel.svg": "6e5fc87b0efb5ab958c89868180d4b0a93fd03668f509bfb462c58c7ebf59e55",
     ".github\\workflows\\docs-pages.yml": "9deb98079332f99e96e6135ac2cee346beefd067e4f3fc55c47128fcb10c646a",
     ".github\\workflows\\tests.yml": "9a2355d66af694f9a5917c5844e98e0573d5955869fa6caf39fa709bc7c143a1",
-    "tools\\check_release.py": "5ef6b04011e0f125811649e7109d9bd690e027b50a960ca9c709a5585c949dcc",
-    "tools\\export_preview.py": "bff08bf083ee3618b833688b6dd4e5aab7c6fbd47aaba8f1c03cddaf166402ad",
+    "tools\\check_release.py": "4a900cf529ca3580c85c1280a4a7c0039231658fde721f05e8ecaf2805c24cb0",
+    "tools\\export_preview.py": "92031c51d00e43e452d25db36abf0f9840b0a688df6652d19d7162d28f843e2b",
     "tools\\function_test_report.py": "1de6040c6c4cfb142cc77db69f72a9c6922c25fc807a26ec615c8219628a8163"
   }
 }

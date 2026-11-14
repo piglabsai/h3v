@@ -1,6 +1,6 @@
 # H3V — Extending H3 into Three Dimensions
 
-**Experimental preview 0.1.1.** Public API and serialized-index compatibility
+**Experimental preview 0.1.2.** Public API and serialized-index compatibility
 are not yet guaranteed. Record the H3V package version alongside persisted
 voxel IDs.
 

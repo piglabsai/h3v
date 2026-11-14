@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "h3v"
-version = "0.1.1"
+version = "0.1.2"
 description = "H3 cells with altitude and independent surface and radial resolutions"
 readme = "README.md"
 requires-python = ">=3.10"

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.2 - Hosted documentation links
+
+- Point PyPI's Documentation project link and README guides to the live
+  documentation at https://piglabsai.github.io/h3v/.
+- Check that release metadata and the README link to the hosted documentation.
+- No library behavior or serialized ID changes.
+
 ## 0.1.1 - Publication corrections
 
 - Lead package documentation with installation from PyPI and a first example.

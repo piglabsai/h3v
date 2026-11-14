@@ -106,9 +106,9 @@ modules and licenses, checks the README's installation command and absolute
 links, and executes its examples against the installed candidate. Twine checks
 description rendering; link availability still needs a live check.
 
-Do not upload a rebuilt `0.1.0` wheel: that version is already on PyPI. These
-documentation fixes require a new package version, such as `0.1.1`, with a
-matching changelog entry, preview notices, snapshot manifest, and release tag.
+Never overwrite a version already published on PyPI. Metadata and documentation
+corrections intended for PyPI require a new package version with a matching
+changelog entry, preview notices, snapshot manifest, and release tag.
 Keep the original release intact. Upload the same verified wheel and sdist to
 PyPI and attach them to the matching GitHub release; record their SHA-256 hashes.
 Check the live PyPI description and installed package after publication.
@@ -120,7 +120,7 @@ when development history must remain private.
 
 ## Verify a preview wheel in a clean environment
 
-Version 0.1.1 is an experimental preview under Apache License 2.0. It uses
+Version 0.1.2 is an experimental preview under Apache License 2.0. It uses
 H3 4.5.0. Public API and serialized-index compatibility are not yet guaranteed.
 
 From the repository root in PowerShell, using a new environment directory:
@@ -128,7 +128,7 @@ From the repository root in PowerShell, using a new environment directory:
 ```powershell
 .\.venv\Scripts\python.exe -m pip wheel . --no-deps --wheel-dir build/release
 .\.venv\Scripts\python.exe -m venv build/release-check
-.\build\release-check\Scripts\python.exe -m pip install build/release/h3v-0.1.1-py3-none-any.whl
+.\build\release-check\Scripts\python.exe -m pip install build/release/h3v-0.1.2-py3-none-any.whl
 .\build\release-check\Scripts\python.exe -m pip check
 .\build\release-check\Scripts\python.exe -I -c "import h3v; print(h3v.__file__)"
 .\build\release-check\Scripts\python.exe -I -m unittest discover -s tests -v
@@ -165,7 +165,7 @@ Set-Location build/public-preview
 git init -b main
 git add .
 git diff --cached --stat
-git commit -m "H3V 0.1.1 experimental preview"
+git commit -m "H3V 0.1.2 experimental preview"
 git remote add origin https://github.com/piglabsai/h3v.git
 git push -u origin main
 ```
@@ -173,8 +173,8 @@ git push -u origin main
 After the new repository's CI checks pass, create a tag on that tested commit:
 
 ```powershell
-git tag -a v0.1.1 -m "H3V 0.1.1 experimental preview"
-git push origin v0.1.1
+git tag -a v0.1.2 -m "H3V 0.1.2 experimental preview"
+git push origin v0.1.2
 ```
 
 On GitHub, create a release from that tag, use the matching changelog entry,

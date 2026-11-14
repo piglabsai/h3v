@@ -41,6 +41,11 @@ def check_release(directory):
         links = re.findall(r"\[[^\]]+\]\(([^)]+)\)", readme)
         if not links or any(not link.startswith("https://") for link in links):
             raise ValueError("Published README links must be absolute HTTPS URLs")
+        documentation_url = "https://piglabsai.github.io/h3v/"
+        if f"Documentation, {documentation_url}" not in package.get_all("Project-URL", []):
+            raise ValueError("The Documentation project URL must point to the hosted website")
+        if documentation_url not in links or documentation_url + "api_reference.html" not in links:
+            raise ValueError("The README must link to the hosted documentation and API reference")
         modules = {n for n in wheel.namelist() if n.endswith(".py")}
         source_modules = {Path(n).name for n in source.getnames()
                           if n.startswith(f"{root}/src/") and n.endswith(".py")}
