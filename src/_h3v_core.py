@@ -45,19 +45,18 @@ _RADIAL_DIGIT_SLOTS = 10
 _BASE_SHIFT = _BITS_PER_DIGIT * _RADIAL_DIGIT_SLOTS
 _BASE_MASK = 0xFF
 _RESOLUTION_SHIFT = _BASE_SHIFT + 8
-_FORMAT_SHIFT = 60
-_FORMAT_VERSION = 4
-_HEADER = _FORMAT_VERSION << _FORMAT_SHIFT
+_HEADER_SHIFT = 60
+_HEADER = 0b100 << _HEADER_SHIFT
 _UNUSED_DIGITS = (1 << _BASE_SHIFT) - 1
 _MASK64 = (1 << _HALF_BITS) - 1
 _RADIAL_DIRECTION_SHIFT = _RESOLUTION_SHIFT + _BITS_PER_DIGIT
 _RADIAL_DIRECTION_MASK = 3 << _RADIAL_DIRECTION_SHIFT
 _RADIAL_RESERVED_SHIFT = _RADIAL_DIRECTION_SHIFT + 2
-_RADIAL_RESERVED_MASK = ((1 << (_FORMAT_SHIFT - _RADIAL_RESERVED_SHIFT)) - 1) << _RADIAL_RESERVED_SHIFT
+_RADIAL_RESERVED_MASK = ((1 << (_HEADER_SHIFT - _RADIAL_RESERVED_SHIFT)) - 1) << _RADIAL_RESERVED_SHIFT
 
 
 _RADIAL_METADATA_MASK = (
-    (0xF << _FORMAT_SHIFT) | _RADIAL_RESERVED_MASK | _RADIAL_DIRECTION_MASK
+    (0xF << _HEADER_SHIFT) | _RADIAL_RESERVED_MASK | _RADIAL_DIRECTION_MASK
 )
 
 
@@ -130,7 +129,7 @@ def _read_radial(radial_index):
     if type(radial_index) is not int or not 0 <= radial_index < 1 << _HALF_BITS:
         raise ValueError("radial index must be an unsigned 64-bit integer")
     if radial_index & _RADIAL_METADATA_MASK != _HEADER:
-        raise ValueError("radial format version must be 4; direction and reserved bits must be zero")
+        raise ValueError("invalid radial header; direction and reserved bits must be zero")
     resolution = _resolution(
         (radial_index >> _RESOLUTION_SHIFT) & _DIGIT_MASK,
         MAX_RADIAL_RESOLUTION,

@@ -29,7 +29,7 @@ def voxel_to_parent(index, surface_resolution=None, radial_resolution=None):
     Parameters
     ----------
     index : int
-        A valid format-v4 volumetric voxel ID returned by H3V.
+        A valid H3V voxel ID.
     surface_resolution : int or None, optional
         Target horizontal resolution. None keeps the current value.
     radial_resolution : int or None, optional
@@ -80,7 +80,7 @@ def voxel_to_children(index, *, refine_surface=False, refine_radial=True):
     Parameters
     ----------
     index : int
-        A valid format-v4 volumetric voxel ID returned by H3V.
+        A valid H3V voxel ID.
     refine_surface : bool, optional
         Divide the H3 footprint by one level. Default False.
     refine_radial : bool, optional

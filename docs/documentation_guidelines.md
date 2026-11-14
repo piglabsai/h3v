@@ -93,7 +93,7 @@ duplicate parameter contracts in hand-written reference prose.
 - Altitude is kilometres above the fixed reference sphere, not terrain or an
   ellipsoid. Use `authalic_earth_radius()` for the actual constant and `R` in
   formulas, defining `R` as the exact ratio represented by that constant.
-- Format v4 uses unsigned radial bases 0..255, direct child digits 0..6, and
+- The index uses unsigned radial bases 0..255, direct child digits 0..6, and
   `f` padding. Base 0 covers Earth's interior; altitude zero begins base 1.
   The exact input domain is `-R < altitude < 255*R`.
 - Every valid voxel ID represents a volume. Zero is an ordinary coordinate, and
@@ -133,7 +133,7 @@ voxel center as the original point.
   duplicates; category modules have disjoint public exports.
 - Placeholder categories are clearly marked and contain no stub functions.
 - Shared support has no dependency on category modules or the facade.
-- Source moves preserve behavior, exact arithmetic, and format-v4 serialization.
+- Source moves preserve behavior, exact arithmetic, and index serialization.
 - Public docstrings remain the source of detailed API contracts.
 - All unit tests and Sphinx examples pass, and the strict HTML build has no
   warnings or unresolved references.

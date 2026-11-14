@@ -184,7 +184,7 @@ def voxel_to_latlngalt(index):
     Parameters
     ----------
     index : int
-        A valid format-v4 volumetric voxel ID returned by H3V.
+        A valid H3V voxel ID.
 
     Returns
     -------
@@ -338,7 +338,7 @@ def voxel_to_altitude_bounds(index):
     Parameters
     ----------
     index : int
-        A valid format-v4 volumetric voxel ID returned by H3V.
+        A valid H3V voxel ID.
 
     Returns
     -------
@@ -389,7 +389,7 @@ def voxel_to_boundary(index):
     Parameters
     ----------
     index : int
-        A valid format-v4 volumetric voxel ID returned by H3V.
+        A valid H3V voxel ID.
 
     Returns
     -------

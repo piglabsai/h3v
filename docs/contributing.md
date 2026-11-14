@@ -64,18 +64,66 @@ refresh the browser after editing documentation.
 
 ## Continuous integration and publishing
 
-The GitHub workflow runs library tests on Linux and Windows with Python 3.10,
-3.12, and 3.14. A separate job builds the documentation and checks its examples.
-It does not deploy the HTML to GitHub Pages.
+The Tests workflow runs library tests on Linux and Windows with Python 3.10,
+3.12, and 3.14. Each matrix job builds an sdist and then a wheel from that sdist,
+checks metadata rendering with Twine, installs the wheel, and checks artifact
+consistency and the README examples with `tools/check_release.py`.
+A separate job builds the documentation, checks its examples, and saves the
+rendered HTML as the `documentation-html` artifact.
 
 Commit documentation sources with related API changes. Pushing a commit uploads
 those sources; it does not publish the generated website. Software release tags
-must match the version in `pyproject.toml`. The encoded index format has its own
-version, described in the [format specification](format.md).
+must match the version in `pyproject.toml`. The index layout and fixed header
+marker are described in the [format specification](format.md).
+
+To publish the documentation, enable GitHub Pages in the public repository's
+Settings > Pages and select **GitHub Actions** as the source. Run the
+**Publish documentation** workflow manually on `main`. It checks the HTML and
+examples before deploying through the `github-pages` environment.
+After the deployment succeeds, verify the reported URL and its guide and API
+pages. Only then replace the README's documentation-source links and the
+`Documentation` project URL with the working website URLs. Until then, the
+README identifies API links as Sphinx sources and points users to Python's
+installed `help()` documentation.
+
+## Check publication artifacts
+
+Use a fresh output directory for every candidate. Build from the reviewed public
+snapshot described below when publishing without development history or comments.
+Run these commands from that source tree, with its development environment ready:
+
+```powershell
+python -m pip install build twine
+python -m build --outdir build/publication-candidate
+python -m twine check --strict build/publication-candidate/*
+python -m venv build/publication-check
+$candidateWheel = (Get-ChildItem build/publication-candidate/*.whl).FullName
+.\build\publication-check\Scripts\python.exe -m pip install $candidateWheel
+.\build\publication-check\Scripts\python.exe -m pip check
+.\build\publication-check\Scripts\python.exe -I tools/check_release.py build/publication-candidate
+.\build\publication-check\Scripts\python.exe -I -m unittest discover -s tests -v
+```
+
+The checker requires exactly one wheel and one sdist, compares their metadata,
+modules and licenses, checks the README's installation command and absolute
+links, and executes its examples against the installed candidate. Twine checks
+description rendering; link availability still needs a live check.
+
+Do not upload a rebuilt `0.1.0` wheel: that version is already on PyPI. These
+documentation fixes require a new package version, such as `0.1.1`, with a
+matching changelog entry, preview notices, snapshot manifest, and release tag.
+Keep the original release intact. Upload the same verified wheel and sdist to
+PyPI and attach them to the matching GitHub release; record their SHA-256 hashes.
+Check the live PyPI description and installed package after publication.
+
+The development checkout's Git remote can differ from the public repository.
+Inspect `git remote -v` before pushing; the public destination is
+<https://github.com/piglabsai/h3v>. Use the separate snapshot workflow below
+when development history must remain private.
 
 ## Verify a preview wheel in a clean environment
 
-Version 0.1.0 is an experimental preview under Apache License 2.0. It uses
+Version 0.1.1 is an experimental preview under Apache License 2.0. It uses
 H3 4.5.0. Public API and serialized-index compatibility are not yet guaranteed.
 
 From the repository root in PowerShell, using a new environment directory:
@@ -83,7 +131,7 @@ From the repository root in PowerShell, using a new environment directory:
 ```powershell
 .\.venv\Scripts\python.exe -m pip wheel . --no-deps --wheel-dir build/release
 .\.venv\Scripts\python.exe -m venv build/release-check
-.\build\release-check\Scripts\python.exe -m pip install build/release/h3v-0.1.0-py3-none-any.whl
+.\build\release-check\Scripts\python.exe -m pip install build/release/h3v-0.1.1-py3-none-any.whl
 .\build\release-check\Scripts\python.exe -m pip check
 .\build\release-check\Scripts\python.exe -I -c "import h3v; print(h3v.__file__)"
 .\build\release-check\Scripts\python.exe -I -m unittest discover -s tests -v
@@ -120,7 +168,7 @@ Set-Location build/public-preview
 git init -b main
 git add .
 git diff --cached --stat
-git commit -m "H3V 0.1.0 experimental preview"
+git commit -m "H3V 0.1.1 experimental preview"
 git remote add origin https://github.com/piglabsai/h3v.git
 git push -u origin main
 ```
@@ -128,8 +176,8 @@ git push -u origin main
 After the new repository's CI checks pass, create a tag on that tested commit:
 
 ```powershell
-git tag -a v0.1.0 -m "H3V 0.1.0 experimental preview"
-git push origin v0.1.0
+git tag -a v0.1.1 -m "H3V 0.1.1 experimental preview"
+git push origin v0.1.1
 ```
 
 On GitHub, create a release from that tag, use the matching changelog entry,

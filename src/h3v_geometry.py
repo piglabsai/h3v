@@ -119,7 +119,7 @@ def voxel_volume(index, unit="km^3"):
     Parameters
     ----------
     index : int
-        A valid format-v4 volumetric voxel ID returned by H3V.
+        A valid H3V voxel ID.
     unit : str, optional
         'km^3' for cubic kilometres (default), or 'm^3' for cubic metres.
 

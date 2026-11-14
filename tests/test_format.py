@@ -1,4 +1,4 @@
-"""Contract checks for unsigned, radius-based format-v4 indices."""
+"""Contract checks for unsigned, radius-based H3V indices."""
 from fractions import Fraction
 import math
 import random
@@ -17,7 +17,7 @@ def voxel(height, resolution):
     return h3v.latlngalt_to_voxel(52, 13, height, 3, resolution)
 
 
-class V4ContractTests(unittest.TestCase):
+class FormatContractTests(unittest.TestCase):
     def test_radius_bin_roundtrips_all_bases_and_cross_zero_adjacency(self):
         for r in range(11):
             s = 7**r
@@ -90,10 +90,10 @@ class V4ContractTests(unittest.TestCase):
 
     def test_unsigned_base_field_separate_from_digits_resolution_and_header(self):
         for base in range(256):
-            radial = (4 << 60) | (10 << 48) | (base << 40) | 0x0123456012
+            radial = (0b100 << 60) | (10 << 48) | (base << 40) | 0x0123456012
             index = (radial << 64) | CELL
             self.assertTrue(h3v.is_valid_voxel(index))
-            self.assertEqual(index >> 124, 4)
+            self.assertEqual(index >> 124, 0b100)
             self.assertEqual((index >> 112) & 15, 10)
             self.assertEqual((index >> 104) & 255, base)
             self.assertEqual((index >> 64) & ((1 << 40)-1), 0x0123456012)
@@ -101,12 +101,12 @@ class V4ContractTests(unittest.TestCase):
             self.assertEqual(voxel(Fraction(*bounds.midpoint_ratio), 10), index)
             self.assertEqual(h3v.str_to_int(h3v.int_to_str(index)), index)
 
-    def test_old_versions_and_zero_radials_rejected_consistently(self):
+    def test_invalid_headers_and_zero_radials_rejected_consistently(self):
         valid = voxel(0, 3)
         indices = [CELL]
-        for version in range(16):
-            if version != 4:
-                indices.append((valid & ((1 << 124)-1)) | (version << 124))
+        for header in range(16):
+            if header != 0b100:
+                indices.append((valid & ((1 << 124)-1)) | (header << 124))
 
         for radial in (0x2000900555555555, 0x2000980555555555,
                        0x3000900555555555, 0x30009ff555555555):

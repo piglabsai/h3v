@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "h3v"
-version = "0.1.0"
-description = "Packed 128-bit H3 volume indices with independent surface and radial resolutions"
+version = "0.1.1"
+description = "H3 cells with altitude and independent surface and radial resolutions"
 readme = "README.md"
 requires-python = ">=3.10"
 license = "Apache-2.0"
@@ -15,6 +15,9 @@ dependencies = ["h3==4.5.0"]
 
 [project.urls]
 Repository = "https://github.com/piglabsai/h3v"
+Documentation = "https://github.com/piglabsai/h3v/blob/main/docs/index.md"
+Issues = "https://github.com/piglabsai/h3v/issues"
+Changelog = "https://github.com/piglabsai/h3v/blob/main/CHANGELOG.md"
 
 [project.optional-dependencies]
 docs = [

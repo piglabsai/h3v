@@ -1,4 +1,4 @@
-"""Acceptance tests for strictly volumetric format-v4 H3V indices."""
+"""Acceptance tests for strictly volumetric H3V indices."""
 from decimal import Decimal
 from dataclasses import FrozenInstanceError
 from fractions import Fraction
@@ -327,7 +327,7 @@ assert h3v.latlngalt_to_voxel(*h3v.voxel_to_latlngalt(negative), 2, 9) == negati
             with self.assertRaises(ValueError):
                 voxel_to_boundary(value)
 
-    def test_validation_reserved_fields_and_legacy_rejection(self):
+    def test_validation_reserved_fields_and_invalid_encoding_rejection(self):
         base = cell_at_height(1, 0)
         for marker in range(16):
             changed = (base & ((1 << 124) - 1)) | marker << 124
@@ -348,8 +348,8 @@ assert h3v.latlngalt_to_voxel(*h3v.voxel_to_latlngalt(negative), 2, 9) == negati
                     expected = 0 <= digit <= 6 if level < resolution else digit == 15
                     self.assertEqual(is_valid_voxel(changed), expected)
         surface = h3.latlng_to_cell(52, 13, 3)
-        for legacy in (0x100000ffffffffff, 0x100120000000000f, 0x100129999999999f):
-            packed = (legacy << 64) | surface
+        for invalid_radial in (0x100000ffffffffff, 0x100120000000000f, 0x100129999999999f):
+            packed = (invalid_radial << 64) | surface
             self.assertFalse(is_valid_voxel(packed))
             with self.assertRaises(ValueError):
                 voxel_to_latlngalt(packed)

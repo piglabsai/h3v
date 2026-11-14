@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.1.1 - Publication corrections
+
+- Lead package documentation with installation from PyPI and a first example.
+- Use absolute public documentation and license links in the PyPI description.
+- Keep encoding details and contributor build commands out of the README.
+- Include documentation, tests, and release tools in source distributions.
+- Check wheel/sdist consistency, metadata rendering, and installed README examples in CI.
+- Save rendered documentation in CI and add a manual GitHub Pages deployment workflow.
+- Describe the first published index format using its fixed header marker,
+  without development-era format numbering. Serialized IDs remain unchanged.
+
 ## 0.1.0 - Experimental preview
 
 First preview of H3V's 128-bit volumetric indexing and spherical geometry API.
@@ -13,4 +24,4 @@ First preview of H3V's 128-bit volumetric indexing and spherical geometry API.
 
 This is an experimental preview. Public API and serialized-index compatibility
 are not yet guaranteed. Record the H3V package version alongside persisted
-voxel IDs; the encoded format version is currently 4.
+voxel IDs.

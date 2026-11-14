@@ -1,0 +1,6 @@
+include README.md CHANGELOG.md LICENSE NOTICE
+recursive-include docs *.md *.py *.svg
+recursive-include tests *.py
+recursive-include tools *.py
+recursive-include .github/workflows *.yml
+prune docs/_build

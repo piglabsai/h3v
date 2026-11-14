@@ -15,7 +15,7 @@ def get_resolution(index):
     Parameters
     ----------
     index : int
-        A valid format-v4 volumetric voxel ID returned by H3V.
+        A valid H3V voxel ID.
 
     Returns
     -------
@@ -61,7 +61,7 @@ def is_valid_voxel(index):
 
     Notes
     -----
-    Bare H3 cell integers and old-format IDs are invalid. Strings, booleans,
+    Bare H3 cell integers and unsupported encodings are invalid. Strings, booleans,
     and malformed integer IDs return False rather than raising an exception.
 
     Examples
@@ -85,7 +85,7 @@ def voxel_to_cell(index):
     Parameters
     ----------
     index : int
-        A valid format-v4 volumetric voxel ID returned by H3V.
+        A valid H3V voxel ID.
 
     Returns
     -------

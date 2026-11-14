@@ -35,7 +35,7 @@ def export(destination):
         raise ValueError("The export destination must be inside this repository's build directory")
     if destination.exists():
         raise ValueError("Choose a new export directory; existing snapshots are never overwritten")
-    top_files = ("README.md", "LICENSE", "NOTICE", "CHANGELOG.md", "pyproject.toml", ".gitignore")
+    top_files = ("README.md", "LICENSE", "NOTICE", "CHANGELOG.md", "pyproject.toml", "MANIFEST.in", ".gitignore")
     files = [ROOT / name for name in top_files]
     for directory in ("src", "tests", "docs", ".github", "tools"):
         files.extend(path for path in (ROOT / directory).rglob("*")
@@ -54,7 +54,7 @@ def export(destination):
             shutil.copyfile(path, target)
         manifest[str(relative)] = hashlib.sha256(target.read_bytes()).hexdigest()
     (destination / "PREVIEW_MANIFEST.json").write_text(json.dumps({
-        "version": "0.1.0", "status": "experimental preview",
+        "version": "0.1.1", "status": "experimental preview",
         "scope": "Allowlisted current source files; no .git history, GitHub discussions, local environments, or reports",
         "comments": "Ordinary Python comments removed; docstrings and license notices retained; Python ASTs verified unchanged",
         "limitations": "This is a source snapshot, not an erasure of existing public forks, clones, caches, or the original repository",

@@ -1,6 +1,6 @@
 # Format specification
 
-This page defines H3V's **version-4** volumetric index format. Every valid voxel ID
+This page defines H3V's volumetric index format. Every valid voxel ID
 combines an H3 footprint with a finite, positive-width radial interval.
 Altitude zero is an ordinary coordinate; bare H3 cells are invalid voxel IDs.
 
@@ -29,7 +29,7 @@ and all 122 H3 surface base cells. The upper half uses this layout:
 | Voxel bits | Radial bits | Meaning |
 |---|---|---|
 | 127 | 63 | Must be zero |
-| 126..124 | 62..60 | Format version: 4 |
+| 126..124 | 62..60 | Header marker: binary `100` |
 | 123..118 | 59..54 | Reserved; must be zero |
 | 117..116 | 53..52 | Radial direction: zero for voxels; see directed edges |
 | 115..112 | 51..48 | Radial resolution: 0..10 |
@@ -38,8 +38,7 @@ and all 122 H3 surface base cells. The upper half uses this layout:
 
 All 256 base-byte values are valid: base 0 stores as `00`, base 1 as `01`,
 and base 255 as `ff`. There is no sign field or signed interpretation. An
-all-zero radial half is invalid. Every ID carries version 4; previous formats
-are rejected. The ten refinement slots still fit within the 64-bit radial half.
+all-zero radial half is invalid. Every ID carries the fixed header marker. The ten refinement slots still fit within the 64-bit radial half.
 
 ## Base intervals and altitude limits
 
@@ -188,7 +187,7 @@ uppercase characters, or a different length. Use strings to exchange IDs with
 systems that cannot store 128-bit integers exactly.
 
 Validate the complete voxel before extracting its H3 cell. Reject bare H3
-integers, zero radial halves, unsupported versions, malformed digits or padding, nonzero reserved bits, and invalid resolutions or H3 cells.
+integers, zero radial halves, invalid header markers, malformed digits or padding, nonzero reserved bits, and invalid resolutions or H3 cells.
 `is_valid_voxel()` returns `False`; other voxel APIs raise `ValueError`.
 
 ## Coordinate and measurement contracts
@@ -355,33 +354,6 @@ hexadecimal representation to obtain a full 32-digit serialized voxel ID.
 | -R + R / (2 * 7**10) | 10 | `400a000000000000` |
 | 255*R - R / (2 * 7**10) | 10 | `400aff6666666666` |
 
-## Migration from previous formats
-
-Versions 2 and 3 are rejected. Format v4 changes the field positions, base
-interpretation, and active digit encoding; changing only the version bits is
-not a valid migration. No implicit mixed-format decoding is provided.
-
-For an existing version-3 volume, its signed base `B` corresponds to v4 base `B+1`,
-and each active v3 digit 5..b corresponds to the direct v4 digit 0..6. Unused
-digits remain `f`. The expanded domain adds v4 bases 129..255, and radial
-resolution 10 is new.
-
-Old version-2 surface IDs require a chosen radial resolution before becoming
-voxels. Version 2 also assigned positive boundaries to the inner interval,
-whereas v4 uses lower-inclusive, upper-exclusive intervals. Re-encode original
-coordinates when exact boundary assignment matters. The removed `cell_to_voxel`
-surface constructor is not restored; use `latlngalt_to_voxel` with both resolutions.
-
-H3 interoperability extensions remain deferred.
-The line function continues to require valid voxel endpoints and use their centers.
-
-Coordinates, exact altitude ratios, radius constants, and default geometry
-outputs use kilometres; volume defaults to cubic kilometres. Angles default
-to degrees. The exact reference radius is the binary64 H3 kilometre constant
-shown above. Values from a metre-based API must be converted by the caller;
-no automatic unit detection or compatibility decoding is provided.
-
-
 ## Directed edges
 
 An H3V directed edge is a 128-bit origin-plus-direction encoding. Its endpoints
@@ -415,9 +387,8 @@ when available. There are no wraparound edges.
 
 `is_valid_voxel()` and voxel-only operations reject edges. `int_to_str()` and
 `str_to_int()` accept either valid object type using the same 32-character
-lowercase hexadecimal representation. No legacy decoding or compatibility
-fallback is provided. The radial version field remains 4; direction bits and
-the H3 mode distinguish the supported object types.
+lowercase hexadecimal representation. Direction bits and the H3 mode
+distinguish the supported object types; the radial header marker is unchanged.
 
 The graph connection is a directed edge; the shared geometric boundary is a
 face. No face geometry or center-to-center line is implied by the edge ID.
