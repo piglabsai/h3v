@@ -15,7 +15,7 @@ dependencies = ["h3==4.5.0"]
 
 [project.urls]
 Repository = "https://github.com/piglabsai/h3v"
-Documentation = "https://github.com/piglabsai/h3v/blob/main/docs/index.md"
+Documentation = "https://piglabsai.github.io/h3v/"
 Issues = "https://github.com/piglabsai/h3v/issues"
 Changelog = "https://github.com/piglabsai/h3v/blob/main/CHANGELOG.md"
 

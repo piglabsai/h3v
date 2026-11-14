@@ -64,15 +64,16 @@ H3V is a project-specific extension, not an official H3 format.
 
 ## Documentation
 
-- [Understand the grid](https://github.com/piglabsai/h3v/blob/main/docs/concepts.md): voxels, altitude, and resolution.
-- [Usage guide](https://github.com/piglabsai/h3v/blob/main/docs/usage.md): common tasks with runnable examples.
-- [API quick reference source](https://github.com/piglabsai/h3v/blob/main/docs/api_quick.md): functions grouped by task.
-- [API reference source](https://github.com/piglabsai/h3v/blob/main/docs/api_reference.md): Sphinx reference definitions.
-- [Format specification](https://github.com/piglabsai/h3v/blob/main/docs/format.md): exact interval rules and encoding.
+[Documentation home](https://piglabsai.github.io/h3v/)
 
-The documentation sources are available on GitHub. The API reference requires
-Sphinx rendering; use Python's `help(h3v)` or `help(h3v.latlngalt_to_voxel)`
-to read installed API documentation. Development setup, tests, and documentation
+- [Understand the grid](https://piglabsai.github.io/h3v/concepts.html): voxels, altitude, and resolution.
+- [Usage guide](https://piglabsai.github.io/h3v/usage.html): common tasks with runnable examples.
+- [API quick reference](https://piglabsai.github.io/h3v/api_quick.html): functions grouped by task.
+- [API reference](https://piglabsai.github.io/h3v/api_reference.html): parameters, units, and return values.
+- [Format specification](https://piglabsai.github.io/h3v/format.html): exact interval rules and encoding.
+
+Use Python's `help(h3v)` or `help(h3v.latlngalt_to_voxel)` to read installed
+API documentation. Development setup, tests, and documentation
 builds are covered in the [contributor guide](https://github.com/piglabsai/h3v/blob/main/docs/contributing.md).
 
 The repository is <https://github.com/piglabsai/h3v>.

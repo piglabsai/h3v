@@ -76,15 +76,12 @@ those sources; it does not publish the generated website. Software release tags
 must match the version in `pyproject.toml`. The index layout and fixed header
 marker are described in the [format specification](format.md).
 
-To publish the documentation, enable GitHub Pages in the public repository's
-Settings > Pages and select **GitHub Actions** as the source. Run the
+The public documentation is hosted at <https://piglabsai.github.io/h3v/>.
+GitHub Pages uses **GitHub Actions** as its publishing source. Run the
 **Publish documentation** workflow manually on `main`. It checks the HTML and
 examples before deploying through the `github-pages` environment.
-After the deployment succeeds, verify the reported URL and its guide and API
-pages. Only then replace the README's documentation-source links and the
-`Documentation` project URL with the working website URLs. Until then, the
-README identifies API links as Sphinx sources and points users to Python's
-installed `help()` documentation.
+After each deployment succeeds, verify the reported URL and its guide and API
+pages before announcing documentation updates.
 
 ## Check publication artifacts
 
